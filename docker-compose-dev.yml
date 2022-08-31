@@ -14,21 +14,21 @@ services:
     volumes:
       - ./client:/app
       - /app/node_modules
-  # server:
-  #   container_name: api-dev
-  #   build:
-  #     dockerfile: Dockerfile.dev
-  #     context: ./server
-  #   env_file: ./server/.env.dev
-  #   ports:
-  #     - "${PORT}:${PORT}"
-  #   networks:
-  #     - mern-app
-  #   depends_on:
-  #     - mongo
-  #   volumes:
-  #     - ./server:/app
-  #     - /app/node_modules
+  server:
+    container_name: server-dev
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    env_file: ./.env.dev
+    ports:
+      - "${PORT}:${PORT}"
+    networks:
+      - mern-app
+    # depends_on:
+    #   - mongo
+    volumes:
+      - ./server:/app
+      - /app/node_modules
   # mongo:
   #   container_name: mongo-dev
   #   image: mongo:4.4-bionic

@@ -1,6 +1,10 @@
 dev: 
-	docker-compose -f docker-compose-dev.yml up -d
+	docker-compose -f docker-compose-dev.yml --env-file ./.env.dev up -d
 stop:
-	docker-compose -f docker-compose-dev.yml stop
+	docker-compose -f docker-compose-dev.yml --env-file ./.env.dev stop
 down:
-	docker-compose -f docker-compose-dev.yml down
+	docker-compose -f docker-compose-dev.yml --env-file ./.env.dev down
+log-server:
+	docker container logs -f server-dev
+log-client:
+	docker container logs -f client-dev
