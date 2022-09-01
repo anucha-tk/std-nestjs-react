@@ -1,9 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useEffect, useState, useCallback } from "react";
+import reactLogo from "./assets/react.svg";
+import "./App.css";
+import axios from "axios";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const URL = import.meta.env.VITE_APP_BASE_URL;
+  const [posts, setPosts] = useState<{ title: string; body: string }[]>([]);
+
+  const fetch = useCallback(async () => {
+    const { data } = await axios.get<{ title: string; body: string }[]>(URL);
+    setPosts(data);
+  }, []);
+
+  useEffect(() => {
+    fetch();
+  }, []);
 
   return (
     <div className="App">
@@ -23,12 +35,18 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
+        {posts.map((e) => (
+          <ul>
+            <li>e.title: {e.title}</li>
+            <li>e.body: {e.body}</li>
+          </ul>
+        ))}
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

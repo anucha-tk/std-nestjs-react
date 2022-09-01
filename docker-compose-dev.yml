@@ -4,6 +4,7 @@ services:
   client:
     container_name: client-dev
     stdin_open: true
+    env_file: .env.dev
     build:
       dockerfile: Dockerfile.dev
       context: ./client
