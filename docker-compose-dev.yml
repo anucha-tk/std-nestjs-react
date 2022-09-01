@@ -2,7 +2,8 @@ version: "3"
 
 services:
   client:
-    container_name: client-dev
+    image: snr-client-dev
+    container_name: snr-client-dev
     stdin_open: true
     env_file: .env.dev
     build:
@@ -16,7 +17,8 @@ services:
       - ./client:/app
       - /app/node_modules
   server:
-    container_name: server-dev
+    image: snr-server-dev
+    container_name: snr-server-dev
     build:
       dockerfile: Dockerfile.dev
       context: ./server
@@ -31,7 +33,7 @@ services:
       - ./server:/app
       - /app/node_modules
   mongo:
-    container_name: mongo-dev
+    container_name: snr-mongo-dev
     image: mongo:4.4-bionic
     env_file: .env.dev
     environment:
